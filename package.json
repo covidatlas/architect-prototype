@@ -1,0 +1,14 @@
+{
+  "name": "covid-atlas",
+  "description": "Doing it our damn selves.",
+  "dependencies": {
+    "@architect/architect": "^6.2.4",
+    "eslint": "^6.8.0"
+  },
+  "scripts": {
+    "start": "npx sandbox",
+    "start:staging": "NODE_ENV=staging npx sandbox",
+    "lint": "eslint src --ignore-pattern node_modules --fix",
+    "test": "npm run lint #FIXME"
+  }
+}
