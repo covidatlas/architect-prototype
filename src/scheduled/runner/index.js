@@ -1,7 +1,7 @@
 let arc = require('@architect/functions')
 let visitors = require('@architect/shared/visitors')
 
-exports.handler = arc.events.subscribe(runTracker)
+exports.handler = runTracker
 
 async function runTracker () {
   // Walk the tree, generate the links
@@ -19,8 +19,8 @@ async function runTracker () {
       }
     }
   }
-  for await (let payload of items) {
-    arc.events.publish({
+  for (let payload of items) {
+    await arc.events.publish({
       name: 'tracker',
       payload
     })

@@ -8,9 +8,12 @@ module.exports = {
       friendlyName: 'California, US',
 
       // Locales
-
       alameda: {
         friendlyName: 'Alameda County, CA'
+      },
+
+      'los-angeles': {
+        friendlyName: 'Los Angeles, CA'
       },
 
       'san-francisco': {
