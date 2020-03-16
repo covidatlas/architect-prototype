@@ -1,9 +1,11 @@
 let cheerio = require('cheerio')
 let tiny = require('tiny-json-http')
 
-module.exports = async function loader (url) {
+module.exports = async function loader (url, headers) {
   try {
-    let result = await tiny.get({ url })
+    let params = { url }
+    if (headers) params.headers = headers
+    let result = await tiny.get(params)
     if (!result.body) {
       throw Error('Result returned empty body')
     }
