@@ -22,7 +22,7 @@ module.exports = async function visitor ({getResult, loader}) {
         result.totalDeaths = Number(str.split(deaths)[1].trim())
     })
 
-    if (result.totalPositiveCases === false || result.totalDeaths === false)
+    if (result.totalPositiveCases === null || result.totalDeaths === null)
       throw Error('Scrape did not validate')
   }
   catch(err) {

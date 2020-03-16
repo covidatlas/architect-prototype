@@ -27,7 +27,7 @@ module.exports = async function visitor ({getResult='', loader}) {
       result.totalPositiveCases = Number(str.trim())
     })
 
-    if (result.totalPositiveCases === false)
+    if (result.totalPositiveCases === null)
       throw Error('Scrape did not validate')
   }
   catch(err) {

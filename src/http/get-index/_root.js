@@ -2,7 +2,7 @@ let visitors = require('@architect/shared/visitors')
 let Body = require('./_body')
 
 module.exports = async function index (req) {
-  if (req.path !== '/' || process.env.NODE_ENV !== 'testing') return
+  if (req.path !== '/') return
   else {
     // Walk the tree, generate the links
     // This is super crappy and prob needs to support country + locale (no region)
