@@ -10,8 +10,6 @@ module.exports = async function visitor ({getResult='', loader}) {
     }
     let $ = await loader(url, headers)
 
-    // let $ = cheerio.load(test)
-
     // There has got to be a better way...
     let box = $('table.contacts_table')
                 .children('tbody')
