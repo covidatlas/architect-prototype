@@ -1,11 +1,14 @@
 let tz = 'America/Los_Angeles'
 let url = 'http://publichealth.lacounty.gov/media/Coronavirus/'
 
-module.exports = async function visitor ({getResult='', loader}) {
-  let result = getResult(tz)
-  try {
-    let $ = await loader(url)
+module.exports = {
+  scraper,
+  tz,
+  url
+}
 
+async function scraper ({result, $}) {
+  try {
     let box = $('div.counter')
                 .children('div.counter-text')
     $(box).each((i, elem) => {

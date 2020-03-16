@@ -27,7 +27,6 @@ async function runTracker () {
   }
 }
 
-
 // Directly invokable for testing
 if (require.main === module) {
   (async function() {

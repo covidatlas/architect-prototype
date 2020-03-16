@@ -1,10 +1,15 @@
+
 let tz = 'America/Los_Angeles'
 let url = 'https://www.sfdph.org/dph/alerts/coronavirus.asp'
 
-module.exports = async function visitor ({getResult, loader}) {
-  let result = getResult(tz)
+module.exports = {
+  scraper,
+  tz,
+  url
+}
+
+async function scraper ({result, $}) {
   try {
-    let $ = await loader(url)
     let box = $('div.box2#helpful-links').children('p')
     $(box).each((i, elem) => {
       let str = elem &&

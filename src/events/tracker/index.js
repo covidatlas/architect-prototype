@@ -14,14 +14,25 @@ async function tracker (params={}) {
   } = params
 
   let id = `#${country}-#${region}-#${locale}`
-
-  // eslint-disable-next-line
-  let visitor = require(`./visitors/${country}/${region}/${locale}`)
   let data = await arc.tables()
+  let timezone // Assigned out of visitor
 
   try {
-    let result = await visitor({ getResult, loader })
+    // eslint-disable-next-line
+    let visitor = require(`./visitors/${country}/${region}/${locale}`)
+
+    let { tz, url, headers, scraper } = visitor
+    timezone = tz
+    let result = getResult(tz)
+    let $ = await loader(url, headers)
+    result = await scraper({ result, $ })
     result.id = id
+
+    if (debug) {
+      console.log(`visitor ${id} result:`, result)
+    }
+
+    // TODO add validation of assigned values
 
     if (!debug) {
       await data.data.put(result)
@@ -29,16 +40,16 @@ async function tracker (params={}) {
     }
   }
   catch (err) {
-    // TODO Add some logic to ensure an error doesn't overwrite good data?
     console.log(err)
+    let date = timezone ? getDate(timezone) : 'America/Los_Angeles'
     let result = {
       id,
       error: true,
-      date: getDate(visitor.tz),
+      date,
       created: new Date().toISOString()
     }
     if (!debug) {
-      await data.data.put(result)
+      // await data.data.put(result) // TODO Add some logic to ensure an error doesn't overwrite good data?
       await data['all-updates'].put(result)
     }
   }
