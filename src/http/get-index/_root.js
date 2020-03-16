@@ -5,12 +5,14 @@ module.exports = async function index (req) {
   if (req.path !== '/' || process.env.NODE_ENV !== 'testing') return
   else {
     // Walk the tree, generate the links
-    // This is super crappy and def needs to support country + locale
+    // This is super crappy and prob needs to support country + locale (no region)
     let items = []
     let get = node => Object.keys(node).filter(i => i !== 'friendlyName')
     for (let country of get(visitors)) {
+
       let regions = get(visitors[country])
       for (let region of regions) {
+
         let locales = get(visitors[country][region])
         for (let locale of locales) {
           items.push({

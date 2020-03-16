@@ -6,11 +6,11 @@ let loader = require('./_loader')
 exports.handler = arc.events.subscribe(tracker)
 
 async function tracker (params={}) {
-  let { country='us', region='ca', locality='san-francisco' } = params
-  let id = `#${country}-#${region}-#${locality}`
+  let { country='us', region='ca', locale='san-francisco' } = params
+  let id = `#${country}-#${region}-#${locale}`
 
   // eslint-disable-next-line
-  let visitor = require(`./visitors/${country}/${region}/${locality}`)
+  let visitor = require(`./visitors/${country}/${region}/${locale}`)
   let data = await arc.tables()
 
 

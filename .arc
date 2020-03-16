@@ -14,8 +14,8 @@ get /
 @events
 tracker
 
-# @scheduled
-# runner rate(1 hour)
+@scheduled
+runner rate(1 hour)
 
 @tables
 data
